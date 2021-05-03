@@ -2,7 +2,7 @@ package golf
 
 import (
 	"fmt"
-	"golf/session"
+	"github.com/needon1997/go-golf/session"
 	"log"
 	"net/http"
 )

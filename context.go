@@ -3,7 +3,7 @@ package golf
 import (
 	"encoding/json"
 	"fmt"
-	"golf/session"
+	"github.com/needon1997/go-golf/session"
 	"io"
 	"io/ioutil"
 	"net/http"
