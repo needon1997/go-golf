@@ -25,7 +25,7 @@ func NewApplication(path string) *Application {
 	this := &Application{}
 	c, err := LoadConfig(path)
 	if err != nil {
-		panic("config not found")
+		Critical("config not found")
 	}
 	this.Config = c
 	this.router = NewRouter()
@@ -34,6 +34,9 @@ func NewApplication(path string) *Application {
 	return this
 }
 func (this *Application) Initialize() {
+	if this.Config == nil {
+		return
+	}
 	session_on, _ := this.Config.Bool("session.on")
 	if session_on {
 		session_type := this.Config.String("session.type")
@@ -56,7 +59,10 @@ func (this *Application) Initialize() {
 	}
 }
 func (this *Application) Run() {
-	host := this.Config.String("host")
+	host := "localhost:80"
+	if this.Config != nil {
+		host = this.Config.String("host")
+	}
 	http.Handle("/", this.router)
 	for i := 0; i < len(this.daemonList); i++ {
 		go this.daemonList[i]()
@@ -73,7 +79,7 @@ func (this *Application) Add(prefix string, c ControllerInterface) *Application 
 	return this
 }
 
-func (this *Application) RegisterDeamonGo(daemonGo DaemonGo) {
+func (this *Application) RegisterDaemonGo(daemonGo DaemonGo) {
 	this.daemonList = append(this.daemonList, daemonGo)
 }
 
