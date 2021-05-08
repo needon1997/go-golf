@@ -63,7 +63,7 @@ func (this *Context) SetResponseJSON(statusCode int, res interface{}) {
 	io.WriteString(this.W, string(resStr))
 }
 
-//return the first valu
+//return the first value
 func (this *Context) GetFormValue(key string) (string, error) {
 	err := this.R.ParseForm()
 	if err != nil {
