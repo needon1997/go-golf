@@ -50,8 +50,8 @@ func (this *Context) ReadJson(i interface{}) error {
 	return nil
 }
 func (this *Context) SetResponseJSON(statusCode int, res interface{}) {
-	this.W.WriteHeader(statusCode)
 	this.W.Header().Set("Content-Type", "application/json")
+	this.W.WriteHeader(statusCode)
 	if res == nil {
 		return
 	}
