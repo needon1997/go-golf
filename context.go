@@ -51,6 +51,7 @@ func (this *Context) ReadJson(i interface{}) error {
 }
 func (this *Context) SetResponseJSON(statusCode int, res interface{}) {
 	this.W.WriteHeader(statusCode)
+	this.W.Header().Set("Content-Type", "application/json")
 	if res == nil {
 		return
 	}
