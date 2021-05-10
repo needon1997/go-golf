@@ -24,6 +24,7 @@ func Delete(url string, requestBody []byte) (int, []byte, error) {
 
 func makeRequest(method string, url string, requestBody io.Reader) (*http.Response, error) {
 	req, err := http.NewRequest(method, url, requestBody)
+	req.Header.Set("content-type", "application/json")
 	if err != nil {
 		return nil, err
 	}
